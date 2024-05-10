@@ -756,6 +756,7 @@ def main():
         # on the first tokens of the codebooks that are delayed.
         # This fix the issue.
         "min_new_tokens": num_codebooks + 1,
+        "synced_gpus": True
     }
 
     # Define gradient update step fn
