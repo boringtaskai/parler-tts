@@ -14,10 +14,13 @@ feature_extractor = AutoFeatureExtractor.from_pretrained(repo_id)
 
 
 prompt = """
-Hi, I have a server with 8 RTX3090 GPUs, and I’m encountering a CUDA error exclusively when my code is executed on a particular GPU. Specifically, the issue arises only when I set CUDA_VISIBLE_DEVICES=0 . There are no such problems when I use CUDA_VISIBLE_DEVICES=1 , CUDA_VISIBLE_DEVICES=2 , etc.
-Based on this, I suspect there might be a hardware issue with my first GPU (GPU 0). However, I’m finding it challenging to confirm this suspicion. Could you suggest any methods or steps to determine whether this is indeed a hardware-related issue?
+The database DATABASE_URL on Heroku app pontoon-sumbangsuara has exceeded its allocated storage capacity. Immediate action is required.
+The database contains 10,708 rows, exceeding the Mini plan limit of 10,000. INSERT privileges to the database have been automatically revoked. This will cause service failures in most applications dependent on this database.
+To enable access to your database, migrate the database to a Basic ($9/month) or higher database plan:
+https://devcenter.heroku.com/articles/updating-heroku-postgres-databases
+If you are unable to upgrade the database, you should reduce the number of records stored in it.
 """
-description = ""
+description = "'Jenny's speech is very clear, and she speaks in a very monotone voice, really slowly and with minimal variation in speed.'"
 
 input_ids = tokenizer(description, return_tensors="pt").input_ids.to(device)
 prompt_input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to(device)
@@ -32,3 +35,6 @@ SEED = 41
 
 file_path = "output.wav"
 sf.write(file_path, audio_array_int16, SAMPLE_RATE)
+
+# model.push_to_hub("parler-tts-mini-Jenny-test")
+# tokenizer.push_to_hub("parler-tts-mini-Jenny-test")
