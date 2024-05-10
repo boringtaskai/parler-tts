@@ -171,3 +171,10 @@ tags
 .ruff_cache
 
 wandb
+# training result
+audio_code_tmp
+tmp_dataset_audio
+output_dir_training
+gradio_cached_examples
+parler-tts-untrained-600M
+parler-tts-untrained-dummy

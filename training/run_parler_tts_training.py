@@ -816,7 +816,7 @@ def main():
     padding = "max_length" if data_args.pad_to_max_length else "longest"
 
     ####### A. Preparation
-    kwargs_handlers = [InitProcessGroupKwargs(timeout=timedelta(minutes=60))]
+    kwargs_handlers = [InitProcessGroupKwargs(timeout=timedelta(minutes=180))]
     if training_args.torch_compile:
         # TODO(YL): add more compile modes?
         kwargs_handlers.append(TorchDynamoPlugin(backend="inductor", mode="default"))  # reduce-overhead
@@ -875,7 +875,7 @@ def main():
 
     # Log a small summary on each proces
     logger.warning(
-        f"Process rank: {training_args.local_rank}, device: {training_args.device}, n_gpu: {training_args.n_gpu}, "
+        f"Process rank: {training_args.local_rank}, device: {training_args.device}, n_gpu: {training_args.n_gpu}, total_gpu: {torch.cuda.device_count()}, "
         f"distributed training: {training_args.parallel_mode.value == 'distributed'}, 16-bits training: {training_args.fp16}"
     )
 
@@ -1485,6 +1485,7 @@ def main():
         "do_sample": model_args.do_sample,
         "temperature": model_args.temperature,
         "max_length": model_args.max_length,
+        "synced_gpus": True
     }
 
     # Define gradient update step fn

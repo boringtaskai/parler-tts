@@ -1,8 +1,7 @@
 {
-    "model_name_or_path": "./parler-tts-untrained-600M/parler-tts-untrained-600M/",
+    "model_name_or_path": "./parler-tts-untrained-dummy/tiny-model",
     "save_to_disk":  "./tmp_dataset_audio/",
     "temporary_save_to_disk": "./audio_code_tmp/",
-
 
     "feature_extractor_name":"ylacombe/dac_44khZ_8kbps",
     "description_tokenizer_name":"google/flan-t5-base",

@@ -1,7 +1,7 @@
 {
     "model_name_or_path": "./parler-tts-untrained-600M/parler-tts-untrained-600M",
-    "save_to_disk":  "./tmp_dataset_audio/",
-    "temporary_save_to_disk": "./audio_code_tmp/",
+    "save_to_disk":  "/home/ys/project/parler-tts/tmp_dataset_audio/",
+    "temporary_save_to_disk": "/home/ys/project/parler-tts/audio_code_tmp/",
 
     "feature_extractor_name":"ylacombe/dac_44khZ_8kbps",
     "description_tokenizer_name":"google/flan-t5-base",
@@ -11,21 +11,22 @@
     "overwrite_output_dir": true,
     "output_dir": "./output_dir_training",
 
-    "train_dataset_name": "blabble-io/libritts_r+blabble-io/libritts_r+blabble-io/libritts_r+parler-tts/mls_eng_10k",
-    "train_metadata_dataset_name": "parler-tts/libritts_r_tags_tagged_10k_generated+parler-tts/libritts_r_tags_tagged_10k_generated+parler-tts/libritts_r_tags_tagged_10k_generated+parler-tts/mls-eng-10k-tags_tagged_10k_generated",
-    "train_dataset_config_name": "clean+clean+other+default",
-    "train_split_name": "train.clean.360+train.clean.100+train.other.500+train",
+    "train_dataset_name": "blabble-io/libritts_r",
+    "train_metadata_dataset_name": "parler-tts/libritts_r_tags_tagged_10k_generated",
+    "train_dataset_config_name": "clean",
+    "train_split_name": "test.clean",
 
-    "eval_dataset_name": "blabble-io/libritts_r+parler-tts/mls_eng_10k",
-    "eval_metadata_dataset_name": "parler-tts/libritts_r_tags_tagged_10k_generated+parler-tts/mls-eng-10k-tags_tagged_10k_generated",
-    "eval_dataset_config_name": "other+default",
-    "eval_split_name": "test.other+test",
+    "eval_dataset_name": "blabble-io/libritts_r",
+    "eval_metadata_dataset_name": "parler-tts/libritts_r_tags_tagged_10k_generated",
+    "eval_dataset_config_name": "clean",
+    "eval_split_name": "test.clean",
 
     "target_audio_column_name": "audio", 
     "description_column_name": "text_description",
     "prompt_column_name": "text",
 
-    "max_eval_samples": 96,
+    "max_eval_samples": 48,
+    "max_train_samples": 96,
     
     "max_duration_in_seconds": 30,
     "min_duration_in_seconds": 2.0,
@@ -42,7 +43,7 @@
     "num_train_epochs": 40,
     "gradient_accumulation_steps": 8,
     "gradient_checkpointing": false,
-    "per_device_train_batch_size": 4,
+    "per_device_train_batch_size": 2,
     "learning_rate": 0.00095,
     "adam_beta1": 0.9,
     "adam_beta2": 0.99,
@@ -63,11 +64,11 @@
     "eval_steps": 10000,
     "save_steps": 10000,
 
-    "per_device_eval_batch_size": 4,
+    "per_device_eval_batch_size": 2,
 
     "audio_encoder_per_device_batch_size":4,
-    "dtype": "bfloat16",
+    "dtype": "float16",
     "seed": 456,
 
-    "dataloader_num_workers":0
+    "dataloader_num_workers":4
 }

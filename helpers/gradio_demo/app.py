@@ -3,6 +3,8 @@ import torch
 
 from parler_tts import ParlerTTSForConditionalGeneration
 from transformers import AutoTokenizer, AutoFeatureExtractor, set_seed
+import soundfile as sf
+
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
@@ -101,4 +103,4 @@ with gr.Blocks(css=css) as block:
     run_button.click(fn=gen_tts, inputs=inputs, outputs=outputs, queue=True)
 
 block.queue()
-block.launch(share=True)
+block.launch(share=True, server_name="0.0.0.0")
