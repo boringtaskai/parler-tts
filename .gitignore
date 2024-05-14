@@ -178,3 +178,7 @@ output_dir_training
 gradio_cached_examples
 parler-tts-untrained-600M
 parler-tts-untrained-dummy
+output_dir_training_budi
+output_dir_training_id_male
+output_dir_training_indo
+output_dir_training_jenny
