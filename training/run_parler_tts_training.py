@@ -97,14 +97,7 @@ def main():
     padding = "max_length" if data_args.pad_to_max_length else "longest"
 
     ####### A. Preparation
-<<<<<<< HEAD
-    kwargs_handlers = [InitProcessGroupKwargs(timeout=timedelta(minutes=180))]
-    if training_args.torch_compile:
-        # TODO(YL): add more compile modes?
-        kwargs_handlers.append(TorchDynamoPlugin(backend="inductor", mode="default"))  # reduce-overhead
-=======
     kwargs_handlers = [InitProcessGroupKwargs(timeout=timedelta(minutes=60))]
->>>>>>> a0bc9e7 (better group by length + name in run)
 
     accelerator = Accelerator(
         gradient_accumulation_steps=training_args.gradient_accumulation_steps,
@@ -133,7 +126,7 @@ def main():
             "adam_beta2": training_args.adam_beta2,
             "temperature": model_args.temperature,
         },
-        init_kwargs={"wandb": {"name": data_args.wandb_run_name}} if data_args.wandb_run_name else None,
+        init_kwargs={"wandb": {"name": data_args.wandb_run_name}} if data_args.wandb_run_name else {},
     )
 
     # Detecting last checkpoint and eventually continue from last checkpoint
@@ -758,6 +751,10 @@ def main():
         "temperature": model_args.temperature,
         "max_length": model_args.max_length,
         "synced_gpus": True
+        # Because of the delayed pattern mask, generation might stop earlier because of unexpected behaviour
+        # on the first tokens of the codebooks that are delayed.
+        # This fix the issue.
+        "min_new_tokens": num_codebooks + 1,
     }
 
     # Define gradient update step fn
