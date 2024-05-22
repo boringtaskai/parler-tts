@@ -757,6 +757,10 @@ def main():
         # This fix the issue.
         "min_new_tokens": num_codebooks + 1,
         "synced_gpus": True
+        # Because of the delayed pattern mask, generation might stop earlier because of unexpected behaviour
+        # on the first tokens of the codebooks that are delayed.
+        # This fix the issue.
+        "min_new_tokens": num_codebooks + 1,
     }
 
     # Define gradient update step fn
