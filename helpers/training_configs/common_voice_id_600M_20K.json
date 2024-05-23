@@ -8,8 +8,8 @@
     "prompt_tokenizer_name":"google/flan-t5-base",
 
     "report_to": ["wandb"], 
-    "overwrite_output_dir": true,
-    "output_dir": "./output_dir_training",
+    "overwrite_output_dir": false,
+    "output_dir": "./output_dir_training_terakhir_20K",
 
     "train_dataset_name": "boringtaskai/common_voice_13_0_id+boringtaskai/common_voice_13_0_id+boringtaskai/common_voice_13_0_id+boringtaskai/common_voice_13_0_id",
     "train_metadata_dataset_name": "boringtaskai/common_voice_13_0_id_tagged+boringtaskai/common_voice_13_0_id_tagged+boringtaskai/common_voice_13_0_id_tagged+boringtaskai/common_voice_13_0_id_tagged",
@@ -40,7 +40,7 @@
 
     "do_train": true,
     "num_train_epochs": 15,
-    "gradient_accumulation_steps": 2,
+    "gradient_accumulation_steps": 3,
     "gradient_checkpointing": false,
     "per_device_train_batch_size": 2,
     "learning_rate": 0.00095,
@@ -65,7 +65,7 @@
     "per_device_eval_batch_size": 2,
 
     "audio_encoder_per_device_batch_size":2,
-    "dtype": "float32",
+    "dtype": "bfloat16",
     "seed": 456,
 
     "dataloader_num_workers":0
